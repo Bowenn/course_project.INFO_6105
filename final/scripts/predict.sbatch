@@ -18,7 +18,7 @@ conda activate /home/shi.bow/p-self/conda_env/crack_detection
 
 echo "job start"
 
-cd /home/shi.bow/p/course_project.INFO_6105/final
+cd /home/shi.bow/p-self/course_project.INFO_6105/final
 
 # ---- Required: set CHECKPOINT path ----
 CHECKPOINT=${CHECKPOINT:?"Set CHECKPOINT, e.g. --export=ALL,CHECKPOINT=checkpoints/custom_cnn_lr0.001_bs64_best.pt"}

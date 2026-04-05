@@ -18,7 +18,7 @@ conda activate /home/shi.bow/p-self/conda_env/crack_detection
 
 echo "job start"
 
-cd /home/shi.bow/p/course_project.INFO_6105/final
+cd /home/shi.bow/p-self/course_project.INFO_6105/final
 mkdir -p checkpoints
 
 # ---- Hyperparameters (override via: sbatch --export=ALL,MODEL=resnet18,LR=0.0001 scripts/train.sbatch) ----
