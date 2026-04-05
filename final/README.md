@@ -47,7 +47,7 @@ Place the dataset under `final/data/` so that training images are in `data/train
 ### 3. Create log directory
 
 ```bash
-mkdir -p /home/shi.bow/sbatchDir/sbatchLog
+mkdir -p /home/shi.bow/sbatchDir/sbatchLog/crack_detection
 ```
 
 ## Training

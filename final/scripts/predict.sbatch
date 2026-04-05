@@ -2,13 +2,13 @@
 #SBATCH -J crack_pred
 #SBATCH -N 1
 #SBATCH -n 1
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:v100-sxm2:1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=16G
-#SBATCH --time=00:30:00
+#SBATCH --time=00:10:00
 #SBATCH -D /home/shi.bow/sbatchDir
-#SBATCH -o sbatchLog/predict_%j.txt
-#SBATCH -e sbatchLog/predict_err_%j.txt
+#SBATCH -o sbatchLog/crack_detection/predict_%j.txt
+#SBATCH -e sbatchLog/crack_detection/predict_err_%j.txt
 #SBATCH --mail-user=shi.bow@northeastern.edu
 #SBATCH --mail-type=ALL
 

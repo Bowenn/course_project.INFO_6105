@@ -2,13 +2,13 @@
 #SBATCH -J crack_train
 #SBATCH -N 1
 #SBATCH -n 1
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:v100-sxm2:1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
-#SBATCH --time=04:00:00
+#SBATCH --time=01:00:00
 #SBATCH -D /home/shi.bow/sbatchDir
-#SBATCH -o sbatchLog/train_%j.txt
-#SBATCH -e sbatchLog/train_err_%j.txt
+#SBATCH -o sbatchLog/crack_detection/train_%j.txt
+#SBATCH -e sbatchLog/crack_detection/train_err_%j.txt
 #SBATCH --mail-user=shi.bow@northeastern.edu
 #SBATCH --mail-type=ALL
 

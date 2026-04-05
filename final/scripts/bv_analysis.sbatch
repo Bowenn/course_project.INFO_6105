@@ -2,13 +2,13 @@
 #SBATCH -J crack_bv
 #SBATCH -N 1
 #SBATCH -n 1
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:v100-sxm2:1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
-#SBATCH --time=12:00:00
+#SBATCH --time=04:00:00
 #SBATCH -D /home/shi.bow/sbatchDir
-#SBATCH -o sbatchLog/bv_%j.txt
-#SBATCH -e sbatchLog/bv_err_%j.txt
+#SBATCH -o sbatchLog/crack_detection/bv_%j.txt
+#SBATCH -e sbatchLog/crack_detection/bv_err_%j.txt
 #SBATCH --mail-user=shi.bow@northeastern.edu
 #SBATCH --mail-type=ALL
 
