@@ -5,7 +5,7 @@ def get_args():
     parser = argparse.ArgumentParser(description="Surface Crack Detection CNN")
 
     # data
-    parser.add_argument("--data_dir", type=str, default="data/train",
+    parser.add_argument("--data_dir", type=str, default="data/training",
                         help="root dir containing Positive/ and Negative/ subdirs")
     parser.add_argument("--test_dir", type=str, default="data/test",
                         help="dir containing test images")

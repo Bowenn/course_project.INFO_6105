@@ -42,7 +42,7 @@ conda env create -f environment.yml -p /home/shi.bow/p-self/conda_env/crack_dete
 
 ### 2. Prepare data
 
-Place the dataset under `final/data/` so that training images are in `data/train/Positive/` and `data/train/Negative/`, and test images are in `data/test/`.
+Place the dataset under `final/data/` so that training images are in `data/training/Positive/` and `data/training/Negative/`, and test images are in `data/test/`.
 
 ### 3. Create log directory
 
