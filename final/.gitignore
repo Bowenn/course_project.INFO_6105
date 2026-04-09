@@ -1,0 +1,19 @@
+# Dataset
+data/
+
+# Checkpoints
+checkpoints/
+*.pt
+
+# Predictions
+predictions.csv
+
+# Plots
+*.png
+
+# SLURM logs
+sbatchLog/
+
+# Python
+__pycache__/
+*.pyc
