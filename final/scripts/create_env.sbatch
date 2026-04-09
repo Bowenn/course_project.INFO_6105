@@ -14,7 +14,8 @@
 module load anaconda3/2024.06
 . /shared/EL9/explorer/anaconda3/2024.06/etc/profile.d/conda.sh
 
-echo "job start"
+START_TIME=$(date +%s)
+echo "job start: $(date)"
 
 conda env create -f /home/shi.bow/p-self/course_project.INFO_6105/final/environment.yml \
     -p /home/shi.bow/p-self/conda_env/crack_detection
@@ -26,4 +27,6 @@ python --version
 pip list
 
 conda deactivate
-echo "job finished"
+END_TIME=$(date +%s)
+echo "job finished: $(date)"
+echo "duration: $(( (END_TIME - START_TIME) / 3600 ))h $(( (END_TIME - START_TIME) % 3600 / 60 ))m $(( (END_TIME - START_TIME) % 60 ))s"

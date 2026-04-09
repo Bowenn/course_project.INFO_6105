@@ -135,5 +135,5 @@ Outputs `training_curves.png`.
 ```bash
 squeue -u $USER          # check running jobs
 scancel <job_id>         # cancel a job
-cat /home/shi.bow/sbatchDir/sbatchLog/train_<job_id>.txt   # view output
+cat /home/shi.bow/sbatchDir/sbatchLog/crack_detection/train_<job_id>.txt   # view output
 ```
