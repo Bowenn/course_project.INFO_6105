@@ -3,6 +3,7 @@ data/
 
 # Checkpoints
 checkpoints/
+checkpoints.zip
 *.pt
 
 # Predictions
@@ -17,3 +18,5 @@ sbatchLog/
 # Python
 __pycache__/
 *.pyc
+
+**/.DS_Store
