@@ -5,7 +5,7 @@
 #SBATCH --gres=gpu:v100-sxm2:1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem=32G
-#SBATCH --time=08:00:00
+#SBATCH --time=01:00:00
 #SBATCH -D /home/shi.bow/sbatchDir
 #SBATCH -o sbatchLog/crack_detection/all_analysis_%j.txt
 #SBATCH -e sbatchLog/crack_detection/all_analysis_err_%j.txt
@@ -25,7 +25,7 @@ cd /home/shi.bow/p-self/course_project.INFO_6105/final
 BV_RUNS=${BV_RUNS:-10}
 BV_TRAIN_RATIO=${BV_TRAIN_RATIO:-0.5}
 BV_EPOCHS=${BV_EPOCHS:-10}
-SKIP_BV=${SKIP_BV:-""}   # set to "--skip_bv" to only plot curves, no BV
+SKIP_BV=${SKIP_BV:-"--skip_bv"}   # default: only plot curves; set to "" to enable BV analysis
 
 echo "=== All-checkpoint Analysis ==="
 echo "BV_RUNS=${BV_RUNS}  BV_EPOCHS=${BV_EPOCHS}  BV_TRAIN_RATIO=${BV_TRAIN_RATIO}"
