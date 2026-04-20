@@ -15,19 +15,23 @@ final/
 ├── model.py           # CustomCNN + pretrained ResNet/VGG
 ├── train.py           # Training loop with checkpointing
 ├── predict.py         # Inference → CSV
-├── analysis.py        # Bias-variance decomposition & training curve plots
-├── environment.yml    # Conda environment spec
+├── analysis.py            # Bias-variance decomposition & training curve plots (single run)
+├── run_all_analysis.py    # BV analysis + plots for all checkpoints at once
+├── environment.yml        # Conda environment spec
 ├── scripts/
-│   ├── train.sbatch       # Training job
-│   ├── predict.sbatch     # Prediction job
-│   ├── bv_analysis.sbatch # Bias-variance analysis job
-│   └── sweep.sh           # Submit hyperparameter sweep
+│   ├── train.sbatch           # Training job
+│   ├── predict.sbatch         # Prediction job
+│   ├── bv_analysis.sbatch     # Bias-variance analysis job (single model)
+│   ├── all_analysis.sbatch    # BV analysis + plots for all checkpoints
+│   ├── sweep.sh               # Submit hyperparameter sweep
+│   ├── create_env.sbatch      # Create conda environment
+│   └── check_env.sbatch       # Verify environment and CUDA
 └── data/                  # (not tracked in git)
-    ├── train/
+    ├── training/
     │   ├── Positive/
     │   └── Negative/
     └── test/
-        └── *.jpg
+        └── *.png
 ```
 
 ## Setup on HPC Cluster
@@ -94,15 +98,37 @@ Output: `predictions.csv` with columns `image_id`, `predicted_class`.
 
 ## Bias-Variance Analysis
 
+### Single model
+
 ```bash
 sbatch --export=ALL,BV_RUNS=10,EPOCHS=10 scripts/bv_analysis.sbatch
 ```
 
-Trains the model N times on random subsets and reports bias^2, variance, and average error on a held-out set.
+### All checkpoints at once (recommended after a sweep)
+
+```bash
+sbatch scripts/all_analysis.sbatch
+```
+
+For each `*_best.pt` in `checkpoints/`, this will:
+- Plot individual loss/accuracy curves → `checkpoints/<run>_curves.png`
+- Run bootstrap BV analysis → `checkpoints/<run>_bv.json`
+- Generate a combined val accuracy comparison → `checkpoints/comparison_val_acc.png`
+- Generate a BV bar chart across all runs → `checkpoints/comparison_bv.png`
+- Print and save a summary table → `checkpoints/bv_summary.json`
+
+Override BV settings:
+```bash
+# skip BV, only plot training curves (fast)
+sbatch --export=ALL,SKIP_BV="--skip_bv" scripts/all_analysis.sbatch
+
+# fewer runs for a quick test
+sbatch --export=ALL,BV_RUNS=5,BV_EPOCHS=5 scripts/all_analysis.sbatch
+```
 
 ## Plot Training Curves
 
-After training, plot loss/accuracy curves from the saved history:
+For a single checkpoint:
 
 ```bash
 python analysis.py --checkpoint checkpoints/custom_cnn_lr0.001_bs64_best.pt
