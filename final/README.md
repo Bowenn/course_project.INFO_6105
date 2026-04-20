@@ -110,21 +110,23 @@ sbatch --export=ALL,BV_RUNS=10,EPOCHS=10 scripts/bv_analysis.sbatch
 sbatch scripts/all_analysis.sbatch
 ```
 
-For each `*_best.pt` in `checkpoints/`, this will:
+**BV is skipped by default** — the training history curves (train/val accuracy gap) are sufficient to discuss bias-variance tradeoffs for most purposes, and skipping BV keeps the job under 1h. For each `*_best.pt` in `checkpoints/`, this will:
 - Plot individual loss/accuracy curves → `checkpoints/<run>_curves.png`
-- Run bootstrap BV analysis → `checkpoints/<run>_bv.json`
 - Generate a combined val accuracy comparison → `checkpoints/comparison_val_acc.png`
-- Generate a BV bar chart across all runs → `checkpoints/comparison_bv.png`
-- Print and save a summary table → `checkpoints/bv_summary.json`
 
-Override BV settings:
+To enable full BV analysis (trains each model N times from scratch — expensive):
 ```bash
-# skip BV, only plot training curves (fast)
-sbatch --export=ALL,SKIP_BV="--skip_bv" scripts/all_analysis.sbatch
+# run BV on all checkpoints (~8h)
+sbatch --export=ALL,SKIP_BV="" scripts/all_analysis.sbatch
 
-# fewer runs for a quick test
-sbatch --export=ALL,BV_RUNS=5,BV_EPOCHS=5 scripts/all_analysis.sbatch
+# run BV on a single best model instead
+sbatch --export=ALL,MODEL=resnet18,BV_RUNS=10,EPOCHS=10 scripts/bv_analysis.sbatch
 ```
+
+When BV is enabled, additionally saves:
+- `checkpoints/<run>_bv.json` — per-run bias²/variance/error
+- `checkpoints/comparison_bv.png` — bar chart across all runs
+- `checkpoints/bv_summary.json` — combined summary table
 
 ## Plot Training Curves
 
